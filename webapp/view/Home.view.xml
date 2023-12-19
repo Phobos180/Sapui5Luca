@@ -1,0 +1,96 @@
+<mvc:View controllerName="project1.controller.Home"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f='sap.f'
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page id="xpage" title="{i18n>title}">
+		<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onAvvioPress" filterChange=".restoreTable" afterVariantLoad=".onAfterVariantLoad" showClearOnFB="true" clear='.reset'>
+			<fb:filterGroupItems>
+				<fb:FilterGroupItem mandatory="true" name="completed" label="completed" groupName="Group1" visibleInFilterBar="true">
+					<fb:control>
+						<MultiComboBox
+											customData:fieldName="completed"
+										    id="completed"
+											name="completed"
+											selectionChange=".onSelectionChange">
+							<items>
+								<core:Item key="true" text="True" />
+								<core:Item key="false" text="False" />
+							</items>
+						</MultiComboBox>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem groupName="searchFields" name="title" label="{i18n>Title}" visibleInFilterBar="true">
+					<fb:control>
+						<SearchField width="20%" id="titles" placeholder="Cerca qui" liveChange="onChecknumber"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem groupName="searchFields" name="id" label="{i18n>Id}" visibleInFilterBar="true">
+					<fb:control>
+						<SearchField width="20%" id="ids"  placeholder="Cerca qui" liveChange="onChecknumber"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem groupName="searchFields" name="userId" label="{i18n>UserID}" visibleInFilterBar="true">
+					<fb:control>
+						<SearchField width="20%" id="userids" placeholder="Cerca qui" liveChange="onChecknumber" />
+					</fb:control>
+				</fb:FilterGroupItem>
+			</fb:filterGroupItems>
+		</fb:FilterBar>
+		<Table id="idProductsTable" mode="SingleSelectMaster" selectionChange="onRowPress"
+		inset="false"
+		items="{TableModel>/}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<Title text="To dos" level="H2"/>
+						<ToolbarSpacer/>
+						<SearchField width="20%" placeholder="Cerca qui" search="onSearchGeneral"/>
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+			<infoToolbar>
+				<OverflowToolbar></OverflowToolbar>
+			</infoToolbar>
+			<columns>
+				<Column
+				width="12em">
+					<Text text="userId" />
+				</Column>
+				<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+					<Text text="id" />
+				</Column>
+				<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="End">
+					<Text text="title" />
+				</Column>
+				<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="Center">
+					<Text text="completed" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Middle">
+					<cells>
+						<Text
+						text="{TableModel>userId}" />
+						<Text
+						text="{TableModel>id}" />
+						<Text
+						text="{TableModel>title}" />
+						<Text
+						text="{TableModel>completed}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</Page>
+</mvc:View>
