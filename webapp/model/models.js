@@ -42,7 +42,16 @@ sap.ui.define([
 			};
 			
 			return new JSONModel(oModel);
+		},
+        createDettaglioModel: function() {
+			
+			var oModel = {
+ 
+			};
+							
+			return new JSONModel(oModel);
 		}
+
 
         
     };

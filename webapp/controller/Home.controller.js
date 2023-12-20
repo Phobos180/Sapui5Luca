@@ -194,7 +194,9 @@ sap.ui.define([
                 },
 
                 onRowPress: function (oEvent) {
-                    let oObj = oEvent.getParameters().listItem.getBindingContext("TableModel").getObject(); 
+                    let oObj = oEvent.getParameters().listItem.getBindingContext("TableModel").getObject();
+                    let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    oRouter.navTo("RouteDetail", oObj)
                 },
        
                 onAvvioPress: function(oEvent) {

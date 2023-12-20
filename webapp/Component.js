@@ -35,6 +35,9 @@ sap.ui.define([
 
                 // set the table model
                 this.setModel(models.createTableModel(),"TableModel");
+
+                this.setModel(models.createDettaglioModel(),"DettaglioModel");
+
             }
         });
     }

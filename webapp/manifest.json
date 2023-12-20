@@ -83,7 +83,15 @@
           "target": [
             "TargetHome"
           ]
+        },
+        {
+          "name": "RouteDetail",
+          "pattern": "Detail/{id},{userId},{title},{completed}",
+          "target": [
+            "TargetDetail"
+          ]
         }
+      
       ],
       "targets": {
         "TargetHome": {
@@ -92,8 +100,14 @@
           "clearControlAggregation": false,
           "viewId": "Home",
           "viewName": "Home"
+        }, "TargetDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Detail",
+          "viewName": "Detail"
         }
-      }
+}
     },
     "rootView": {
       "viewName": "project1.view.App",
