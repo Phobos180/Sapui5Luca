@@ -50,8 +50,15 @@ sap.ui.define([
 			};
 							
 			return new JSONModel(oModel);
-		}
+		},
 
+        createTempoModel: function(){
+            var oModel = {
+                deleteEnable: false
+			};
+							
+			return new JSONModel(oModel);
+        },
 
         
     };

@@ -33,14 +33,17 @@ sap.ui.define([
                     var msg = 'Fetch Effettuata'
                     var oModel = this.getView().getModel('TableModel')
                     // var oFilterModel = this.getView().getModel('filterModel')
-                    fetch('https://jsonplaceholder.typicode.com/todos')
-                    .then(response => response.json())
-                    .then(data => {
-                        this.originalData = data;
-                        oModel.setData(data);
-                                                
-                        this.hideBusy();
-                    })
+                    if (!Object.keys(oModel.getData()).length) {
+                        fetch('https://jsonplaceholder.typicode.com/todos')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.originalData = data;
+                            oModel.setData(data);
+                            this.getView().byId("idProductsTable").setModel(oModel)                   
+                        })
+                    }
+                    this.getView().byId("idProductsTable").getBinding("items").refresh()
+                    this.hideBusy();
                 },
 
                 reset: function(){
@@ -48,6 +51,10 @@ sap.ui.define([
                     oBinding = oTable.getBinding('items')
 
                     oBinding.filter()
+                },
+
+                handleDelete: function(){
+
                 },
             
 
@@ -194,10 +201,23 @@ sap.ui.define([
                 },
 
                 onRowPress: function (oEvent) {
-                    let oObj = oEvent.getParameters().listItem.getBindingContext("TableModel").getObject();
-                    let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                    oRouter.navTo("RouteDetail", oObj)
+
+                    let oTemp = this.getView().getModel('temp')
+
+                   let sLength = oEvent.getSource().getSelectedItems().length
+                   
+                    if (sLength > 0) {
+                        oTemp.setProperty('/deleteEnable', true) 
+                    } else {
+                        oTemp.setProperty('/deleteEnable',false);
+                    }
                 },
+
+                onDetailPress: function(oEvent){
+                        let oObj = oEvent.getSource().getBindingContext("TableModel").getObject()
+                        let oRouter = sap.ui.core.UIComponent.getRouterFor(this);        
+                        oRouter.navTo("RouteDetail", oObj)
+                    },
        
                 onAvvioPress: function(oEvent) {
                     this.showBusy();

@@ -39,15 +39,20 @@
 				</fb:FilterGroupItem>
 			</fb:filterGroupItems>
 		</fb:FilterBar>
-		<Table id="idProductsTable" mode="SingleSelectMaster" selectionChange="onRowPress"
+
+		<Table id="idProductsTable" mode="MultiSelect" selectionChange="onRowPress"
 		inset="false"
 		items="{TableModel>/}">
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
 						<Title text="To dos" level="H2"/>
+						
 						<ToolbarSpacer/>
+
 						<SearchField width="20%" placeholder="Cerca qui" search="onSearchGeneral"/>
+
+						<Button icon="sap-icon://delete" press="handleDelete" enabled="{= ${temp>/deleteEnable}}"/>
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
@@ -78,7 +83,7 @@
 				</Column>
 			</columns>
 			<items>
-				<ColumnListItem vAlign="Middle">
+				<ColumnListItem vAlign="Middle" type="Navigation" press="onDetailPress">
 					<cells>
 						<Text
 						text="{TableModel>userId}" />

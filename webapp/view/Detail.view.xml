@@ -5,9 +5,9 @@
 	xmlns:f='sap.ui.layout.form'
 	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Page id="xpage2" title="{title}">
+	<Page id="xpage2" title="{title}" showNavButton="true" navButtonPress="onButtonClick" >
 		<f:Form id="FormDisplay480_12120Dual"
-					editable="false">
+					editable="true">
 					<f:title>
 						<core:Title text="Dettaglio" />
 					</f:title>
@@ -54,5 +54,25 @@
 						</f:FormContainer>
 					</f:formContainers>
 				</f:Form>	
+
+
+			<Dialog id="modifyParametersDialog" title="Modifica Parametri" contentWidth="450px" titleAlignment="Center">
+			<VBox alignItems="Center">
+				<Input id="id" placeholder="Enter id" class="sapUiTinyMarginTopBottom"/>
+				<Input id="userId" placeholder="Enter userId" class="sapUiTinyMarginTopBottom"/>
+				<Input id="title" placeholder="Enter title" class="sapUiTinyMarginTopBottom"/>
+				<Input id="completed" placeholder="Enter completed" class="sapUiTinyMarginTopBottom"/>
+				<Button text="Apply Changes" press="onApplyChanges" class="sapUiTinyMarginTopBottom"/>
+			</VBox>
+			</Dialog>
+			
+			<footer>
+				<Toolbar>
+					<ToolbarSpacer/>
+     				<Button text="Modifica Parametri" press="onOpenDialog" icon="sap-icon://edit"/>
+				</Toolbar>
+
+			</footer>
+
 		</Page>
 </mvc:View>
