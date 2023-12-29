@@ -24,23 +24,23 @@
 				</fb:FilterGroupItem>
 				<fb:FilterGroupItem groupName="searchFields" name="title" label="{i18n>Title}" visibleInFilterBar="true">
 					<fb:control>
-						<SearchField width="20%" id="titles" placeholder="Cerca qui" liveChange="onChecknumber"/>
+						<SearchField width="20%" showSearchButton="false" id="titles" placeholder="Cerca qui" liveChange="onChecknumber"/>
 					</fb:control>
 				</fb:FilterGroupItem>
 				<fb:FilterGroupItem groupName="searchFields" name="id" label="{i18n>Id}" visibleInFilterBar="true">
 					<fb:control>
-						<SearchField width="20%" id="ids"  placeholder="Cerca qui" liveChange="onChecknumber"/>
+						<SearchField width="20%" showSearchButton="false" id="ids"  placeholder="Cerca qui" liveChange="onChecknumber"/>
 					</fb:control>
 				</fb:FilterGroupItem>
 				<fb:FilterGroupItem groupName="searchFields" name="userId" label="{i18n>UserID}" visibleInFilterBar="true">
 					<fb:control>
-						<SearchField width="20%" id="userids" placeholder="Cerca qui" liveChange="onChecknumber" />
+						<SearchField width="20%" showSearchButton="false" id="userids" placeholder="Cerca qui" liveChange="onChecknumber" />
 					</fb:control>
 				</fb:FilterGroupItem>
 			</fb:filterGroupItems>
 		</fb:FilterBar>
 
-		<Table id="idProductsTable" mode="MultiSelect" selectionChange="onRowPress"
+		<Table id="idProductsTable" growing="true" growingThreshold="50" mode="MultiSelect" selectionChange="onRowPress"
 		inset="false"
 		items="{TableModel>/}">
 			<headerToolbar>
@@ -83,7 +83,7 @@
 				</Column>
 			</columns>
 			<items>
-				<ColumnListItem vAlign="Middle" type="Navigation" press="onDetailPress">
+				<ColumnListItem vAlign="Middle" type="Navigation" press="onDetailPress" liveChange="onItemSelect">
 					<cells>
 						<Text
 						text="{TableModel>userId}" />

@@ -53,9 +53,7 @@ sap.ui.define([
                     oBinding.filter()
                 },
 
-                handleDelete: function(){
 
-                },
             
 
                 // onIdSearch: function (oEvent) {
@@ -213,7 +211,38 @@ sap.ui.define([
                     }
                 },
 
-                onDetailPress: function(oEvent){
+                onItemSelect: function(oEvent) {
+                    var oTable = oEvent.getSource();
+                    var oSelectedItem = oEvent.getParameter("listItem");
+                    var oBindingContext = oSelectedItem.getBindingContext();
+                    var oModelData = oBindingContext.getProperty("/"); // Get the data of the selected row
+        
+                    // Your custom logic with the selected row data
+                    console.log("Selected Row Data: ", oModelData);
+                },
+
+                handleDelete: function(oEvent){
+                    let oTable = this.getView().byId("idProductsTable"),
+                        oTableModel = oTable.getModel(),
+                        aSelectedItems = oTable.getSelectedItems(),
+                        aIndicesToRemove = [];
+
+                        
+                        aSelectedItems.forEach((element) => {
+                            var index = oTableModel.getProperty("/").findIndex(elementNested => elementNested.id === parseInt(element.getBindingContext("TableModel").getObject().id));
+                                aIndicesToRemove.push(index)
+                        });
+                        
+                        aIndicesToRemove.forEach((element, counter) => {
+                            oTableModel.getProperty("/").splice(element - counter, 1);
+                        });
+
+                        MessageToast.show("Rimossi " + aSelectedItems.length + " oggetti");
+                        oTableModel.refresh();
+                        oTable.removeSelections();
+                },
+
+                        onDetailPress: function(oEvent){
                         let oObj = oEvent.getSource().getBindingContext("TableModel").getObject()
                         let oRouter = sap.ui.core.UIComponent.getRouterFor(this);        
                         oRouter.navTo("RouteDetail", oObj)

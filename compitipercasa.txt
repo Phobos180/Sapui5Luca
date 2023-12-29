@@ -1,2 +1,6 @@
-Create Bottone Delete per eliminare Oggetto dal file json
-implementare bottone greyed out se i parametri non sono compilati
+Creare un footer sulla Home.view e inserire un bottone che riporta ad una nuova vista chiamata KPI.view 
+
+In questa nuova vista creare un Vizframe di tipo "Donut" che mostra graficamente qual'è l'incidenza in percentuale di quanti true/false ci sono sulla proprietà completed del modello TableModel
+
+SAMPLE del chart
+https://sapui5.hana.ondemand.com/sdk/#/entity/sap.viz.ui5.controls.VizFrame/sample/sap.viz.sample.Donut/code

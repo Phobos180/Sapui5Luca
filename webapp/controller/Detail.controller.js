@@ -22,7 +22,10 @@ sap.ui.define([
                 onInit: function () {
                     let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                     oRouter.getRoute("RouteDetail").attachPatternMatched(this.onRouteMatched, this);
-
+                    var oModel = new sap.ui.model.json.JSONModel({
+                        inputValue: ""
+                      });
+                      this.getView().setModel(oModel);
                 },
 
                 onRouteMatched: function(oEvent, targetName) { 
@@ -46,6 +49,26 @@ sap.ui.define([
                     this.byId("modifyParametersDialog").open();
                 },
                     // issue with how you're getting the model or with the model itself
+
+                
+                
+                onInputChange: function (oEvent)  {
+                    var oTemp = this.getView().getModel('temp');
+                    var sIdValue = this.byId("id").getValue();
+                    var sUserIdValue = this.byId("userId").getValue();
+                    var sTitleValue = this.byId("title").getValue();
+                    var sCompletedValue = this.byId("completed").getValue();
+
+                    var allInputsFilled = sIdValue && sUserIdValue && sTitleValue && sCompletedValue;
+
+                    //Suca chi legge
+                    if (allInputsFilled) {
+                            oTemp.setProperty('/deleteEnable', true) 
+                    } else {
+                            oTemp.setProperty('/deleteEnable', false) 
+                    }
+                },
+
                 onApplyChanges: function() {
 
 

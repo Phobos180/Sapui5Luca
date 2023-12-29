@@ -58,11 +58,11 @@
 
 			<Dialog id="modifyParametersDialog" title="Modifica Parametri" contentWidth="450px" titleAlignment="Center">
 			<VBox alignItems="Center">
-				<Input id="id" placeholder="Enter id" class="sapUiTinyMarginTopBottom"/>
-				<Input id="userId" placeholder="Enter userId" class="sapUiTinyMarginTopBottom"/>
-				<Input id="title" placeholder="Enter title" class="sapUiTinyMarginTopBottom"/>
-				<Input id="completed" placeholder="Enter completed" class="sapUiTinyMarginTopBottom"/>
-				<Button text="Apply Changes" press="onApplyChanges" class="sapUiTinyMarginTopBottom"/>
+				<Input id="id" placeholder="Enter id" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+				<Input id="userId" placeholder="Enter userId" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+				<Input id="title" placeholder="Enter title" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+				<Input id="completed" placeholder="Enter completed" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+				<Button text="Applica Modifiche" press="onApplyChanges" class="sapUiTinyMarginTopBottom" enabled="{= ${temp>/deleteEnable}}"/>
 			</VBox>
 			</Dialog>
 			
