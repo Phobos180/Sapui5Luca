@@ -21,7 +21,7 @@ sap.ui.define([
             
                 onInit: function () {
                     let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                    oRouter.getRoute("RouteHome").attachPatternMatched(this.onRouteMatched, this);
+                    oRouter.getRoute("RouteHome").attachPatternMatched(this.onRouteMatched, this); 
 
                 }, 		
 
@@ -53,7 +53,10 @@ sap.ui.define([
                     oBinding.filter()
                 },
 
-
+                onGraficoShow: function() {
+                    let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    oRouter.navTo("RouteGrafico", )
+                },
             
 
                 // onIdSearch: function (oEvent) {

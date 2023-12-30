@@ -38,7 +38,7 @@ sap.ui.define([
 
                 this.setModel(models.createDettaglioModel(),"DettaglioModel");
 
-                this.setModel(models.createTempoModel(),"temp")
+                this.setModel(models.createTempoModel(),"temp");
             }
         });
     }

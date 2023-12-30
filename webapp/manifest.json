@@ -90,6 +90,13 @@
           "target": [
             "TargetDetail"
           ]
+        },
+        {
+          "name": "RouteGrafico",
+          "pattern": "Grafico:?query:",
+          "target": [
+            "TargetGrafico"
+          ]
         }
       
       ],
@@ -106,6 +113,12 @@
           "clearControlAggregation": false,
           "viewId": "Detail",
           "viewName": "Detail"
+        }, "TargetGrafico": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Grafico",
+          "viewName": "Grafico"
         }
 }
     },

@@ -56,9 +56,6 @@
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
-			<infoToolbar>
-				<OverflowToolbar></OverflowToolbar>
-			</infoToolbar>
 			<columns>
 				<Column
 				width="12em">
@@ -97,5 +94,12 @@
 				</ColumnListItem>
 			</items>
 		</Table>
+					<footer>
+				<Toolbar>
+					<ToolbarSpacer/>
+     				<Button text="Mostra Grafico" press="onGraficoShow"/>
+				</Toolbar>
+
+			</footer>
 	</Page>
 </mvc:View>

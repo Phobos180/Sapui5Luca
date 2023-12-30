@@ -55,7 +55,6 @@
 					</f:formContainers>
 				</f:Form>	
 
-
 			<Dialog id="modifyParametersDialog" title="Modifica Parametri" contentWidth="450px" titleAlignment="Center">
 			<VBox alignItems="Center">
 				<Input id="id" placeholder="Enter id" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
@@ -65,14 +64,5 @@
 				<Button text="Applica Modifiche" press="onApplyChanges" class="sapUiTinyMarginTopBottom" enabled="{= ${temp>/deleteEnable}}"/>
 			</VBox>
 			</Dialog>
-			
-			<footer>
-				<Toolbar>
-					<ToolbarSpacer/>
-     				<Button text="Modifica Parametri" press="onOpenDialog" icon="sap-icon://edit"/>
-				</Toolbar>
-
-			</footer>
-
 		</Page>
 </mvc:View>

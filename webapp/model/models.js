@@ -59,7 +59,6 @@ sap.ui.define([
 							
 			return new JSONModel(oModel);
         },
-
         
     };
 });
