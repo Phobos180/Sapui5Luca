@@ -22,27 +22,44 @@ sap.ui.define([
                 onInit: function () {
                     let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                     oRouter.getRoute("RouteHome").attachPatternMatched(this.onRouteMatched, this); 
-
+                    
                 }, 		
 
                 onRouteMatched: function(oEvent, targetName) { 
+                    console.log("Here's johnny!!");
+                    this.showBusy();
                 
-                    console.log("Here's johnny!!")
-
-                    this.showBusy()
-                    var msg = 'Fetch Effettuata'
-                    var oModel = this.getView().getModel('TableModel')
-                    // var oFilterModel = this.getView().getModel('filterModel')
-                    if (!Object.keys(oModel.getData()).length) {
-                        fetch('https://jsonplaceholder.typicode.com/todos')
-                        .then(response => response.json())
-                        .then(data => {
-                            this.originalData = data;
-                            oModel.setData(data);
-                            this.getView().byId("idProductsTable").setModel(oModel)                   
-                        })
-                    }
-                    this.getView().byId("idProductsTable").getBinding("items").refresh()
+                    var oModel = this.getView().getModel('TableModel');
+                    var temp = this.getView().getModel("temp")
+                    var oArgs = oEvent.getParameter("arguments");
+                    var oBinding = this.getView().byId("idProductsTable").getBinding("items")
+                    if (oArgs && oArgs["?query"] && oArgs["?query"].completed !== undefined) {
+                        console.log("Filtering by completed:", oArgs["?query"].completed);
+                
+                        // Convert string to boolean
+                        var isCompleted = oArgs["?query"].completed === "true";
+                
+                        // If parameters are present, filter the table
+                        var aFilters = [];
+                        aFilters.push(new sap.ui.model.Filter("completed", sap.ui.model.FilterOperator.EQ, isCompleted));
+                                
+                        oBinding.filter(aFilters);
+                        temp.setProperty("/datalength", oBinding.aIndices.length);
+                        
+                    } else {
+                        // If no parameters, show the original table
+                            if (!Object.keys(oModel.getData()).length) {
+                                fetch('https://jsonplaceholder.typicode.com/todos')
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.originalData = data;
+                                    oModel.setData(data);
+                                    temp.setProperty("/datalength", data.length);
+                                    this.getView().byId("idProductsTable").setModel(oModel)                   
+                                })
+                            }
+                        }
+                
                     this.hideBusy();
                 },
 
@@ -57,7 +74,71 @@ sap.ui.define([
                     let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                     oRouter.navTo("RouteGrafico", )
                 },
-            
+
+                handleAdd: function() {
+                        var oController = this,
+                            oTemp = this.getView().getModel("temp");
+                        oController.openDialog("project1.view.fragments.secondDialog").open();
+                },
+                
+
+                openDialog: function (dialogPath) {
+                    //this.closeDialog();
+                    if (!this.__dialog) {
+                        this.__dialog = sap.ui.xmlfragment(this.getView().getId(), dialogPath, this);
+                        this.getView().addDependent(this.__dialog);
+                    }
+                    return this.__dialog;
+                },
+                
+                closeDialog: function() {
+                    if (this.__dialog) {
+                        if( this.__dialog.close ) {
+                            this.__dialog.close();
+                        }
+                        this.__dialog.destroy();
+                        this.__dialog = null;
+                    }
+                },
+                onInputChange: function (oEvent)  {
+                    var oTemp = this.getView().getModel('temp');
+                    var sIdValue = this.byId("nuovoId").getValue();
+                    var sUserIdValue = this.byId("nuovoUserId").getValue();
+                    var sTitleValue = this.byId("nuovoTitle").getValue();
+                    var sCompletedValue = this.byId("nuovoCompleted").getValue();
+
+                    var allInputsFilled = sIdValue && sUserIdValue && sTitleValue && sCompletedValue;
+
+                    //Suca chi legge
+                    if (allInputsFilled) {
+                            oTemp.setProperty('/enableButton', true) 
+                    } else {
+                            oTemp.setProperty('/enableButton', false) 
+                    }
+                },
+
+                onAddObject: function() {
+                    let newPropertyValue1 = this.byId("nuovoId").getValue();
+                    let newPropertyValue2 = this.byId("nuovoUserId").getValue();
+                    let newPropertyValue3 = this.byId("nuovoTitle").getValue();
+                    let newPropertyValue4 = this.byId("nuovoCompleted").getValue();
+                    var nuovoObj = new Object();
+                    var oModel = this.getView().getModel("TableModel");
+                    var oModelData = oModel.getData();
+                    var oTemp = this.getView().getModel("temp")
+                    
+                        nuovoObj.id = newPropertyValue1;
+                        nuovoObj.userId = newPropertyValue2;
+                        nuovoObj.title = newPropertyValue3;
+                        nuovoObj.completed = newPropertyValue4;
+
+                        oModelData.push(nuovoObj);
+                        oModel.setData(oModelData);
+                        oModel.refresh();
+                        oTemp.setProperty("/datalength", oModelData.length);
+                        this.closeDialog();
+                },
+
 
                 // onIdSearch: function (oEvent) {
                 //     // add filter for search
@@ -257,7 +338,9 @@ sap.ui.define([
                     let oTable = this.getView().byId("idProductsTable"),
                         oBinding = oTable.getBinding("items"),
                         aGroupItems = oEvent.getSource().getFilterGroupItems(),
-                        aAllFilter = [];
+                        aAllFilter = [],
+                        oTemp = this.getView().getModel("temp");
+
                 
                     // Execute the individual search functions and combine their results
                     
@@ -278,8 +361,9 @@ sap.ui.define([
                         this.onErrorMessageBoxPress();
                     } else {
                         oBinding.filter(aAllFilter);
+                        oTemp.setProperty("/datalength", oBinding.aIndices.length)
                     }
-                
+                    
                     this.hideBusy();
                 },
 

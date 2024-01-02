@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+    xmlns="sap.m" 
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:ui="sap.ui.table">
+
+    <Dialog id="modifyParametersDialog" title="{i18n>titleDialogAdd}" contentWidth="450px" titleAlignment="Center">
+        <VBox alignItems="Center">
+                <Input  id="nuovoId" placeholder="Enter id" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+                <Input  id="nuovoUserId" placeholder="Enter userId" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+                <Input  id="nuovoTitle" placeholder="Enter title" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+                <Input  id="nuovoCompleted" placeholder="Enter completed" class="sapUiTinyMarginTopBottom" liveChange="onInputChange"/>
+            <Button text="{i18n>aggiungiOggetto}" press="onAddObject" class="sapUiTinyMarginTopBottom" enabled="{= ${temp>/enableButton}}"/>
+        </VBox>
+    </Dialog>
+
+</core:FragmentDefinition>

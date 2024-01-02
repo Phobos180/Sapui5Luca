@@ -25,6 +25,11 @@ sap.ui.define([
                         oRouter.getRoute("RouteGrafico").attachPatternMatched(this.onRouteMatched, this);
                         
                 },
+                onButtonClick: function(){
+                
+                    let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    oRouter.navTo("RouteHome");
+                },
                 
                 onRouteMatched: function() {
                     var graficoDataModel = new JSONModel({});
@@ -45,11 +50,38 @@ sap.ui.define([
                     graficoDataModel.setData(tableModelData)
                     this.getView().setModel(graficoDataModel, "graficoDataModel");
 
-                },  
+                },
+                onDataSelect: function (oEvent) {
+                    var oDataStatus = oEvent.getParameters().data[0].data.Status // RETURNS STATUS
+                    var oDataCount = oEvent.getParameters().data[0].data.Count // RETURN COUNT
 
+                    let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
+                    oRouter.navTo("RouteHome", {
+                        query: {
+                            completed: oDataStatus,
+                        }
+                    });
+
+                    //  // Store parameters in a model or pass them back to the first view through the router
+                    //  // Example using global model:
+                    //  var oFilterModel = sap.ui.getCore().getModel("FilterModel");
+                    //  oFilterModel.setProperty("/status", oDataStatus);
+                    //  oFilterModel.setProperty("/count", oDataCount);
+
+                    //  let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    //  oRouter.navTo("RouteHome");
+                                    
+                   
+                    // let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                    // oRouter.navTo("RouteHome");
+                    // var oModel = this.getView().getModel('TableModel').setData(oDataStatus)
+                    // Call the function in the first view controller to apply the filter
+                    // var oFirstViewController = this.getView().getController(); // Assuming the first view controller is accessible this way
+                    // oFirstViewController.applyTableFilter(oDataStatus, oDataCount);
+
+                    console.log("Hello");
+                    console.log(oDataStatus, + oDataCount);
+                }
             });
-
-
-
     });

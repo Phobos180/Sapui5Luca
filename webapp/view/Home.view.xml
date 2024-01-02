@@ -46,13 +46,13 @@
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
-						<Title text="To dos" level="H2"/>
+						<Title text="Numero Oggetti: {temp>/datalength}" level="H2"/>
 						
 						<ToolbarSpacer/>
 
-						<SearchField width="20%" placeholder="Cerca qui" search="onSearchGeneral"/>
 
 						<Button icon="sap-icon://delete" press="handleDelete" enabled="{= ${temp>/deleteEnable}}"/>
+						<Button icon="sap-icon://add" press="handleAdd" enabled="true"/>
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
