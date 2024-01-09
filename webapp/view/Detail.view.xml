@@ -55,8 +55,8 @@
 					</f:formContainers>
 				</f:Form>
 				
-			<core:Fragment fragmentName="" type="XML"/>
-project1.view.fragments.vdialog
+			<core:Fragment fragmentName="project1.view.fragments.vdialog" type="XML"/>
+				
 			<footer>
 				<Toolbar>
 					<ToolbarSpacer/>
